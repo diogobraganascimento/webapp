@@ -2,8 +2,7 @@
 # Jogo Teca
 
 >## Sobre
-> O projeto consiste na criação de uma aplicação chamada JogoTeca, 
-> onde o site exiba as seguintes informações:
+> O projeto consiste na criação de uma aplicação chamada JogoTeca, onde o site exiba as seguintes informações:
 >* Lista de Jogos
 >* Cadastrar novos jogos
 >* fazer Login 
