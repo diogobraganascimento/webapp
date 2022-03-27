@@ -1,7 +1,6 @@
 
-#Jogo Teca
+# Jogo Teca
 
----
 >## Sobre
 > O projeto consiste na criação de uma aplicação chamada JogoTeca, 
 > onde o site exiba as seguintes informações:
@@ -12,5 +11,6 @@
 
 
 ### Bibliotecas utilizadas
-* Flask == 2.0.3
+* [Python](python.org) == 3.9
+* [Flask](https://flask.palletsprojects.com/en/2.0.x/) == 2.0.3
 
