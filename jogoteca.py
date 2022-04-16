@@ -1,24 +1,20 @@
 from flask import Flask, render_template, request, redirect, session, flash, url_for
+from dao import JogoDao
+from flask_mysqldb import MySQL
+from models import Jogo, Usuario
 
+app = Flask(__name__)
+app.secret_key = 'alura'
 
-class Jogo:
-    def __init__(self, nome, categoria, console):
-        self.nome = nome
-        self.categoria = categoria
-        self.console = console
+app.config['MYSQL_HOST'] = "0.0.0.0"
+app.config['MYSQL_USER'] = "root"
+app.config['MYSQL_PASSWORD'] = "admin"
+app.config['MYSQL_DB'] = "jogoteca"
+app.config['MYSQL_PORT'] = 3306
 
+db = MySQL(app)
 
-jogo1 = Jogo('Tetris', 'Puzzle', 'Atari')
-jogo2 = Jogo('God of War', 'Rack n Slash', 'PS2')
-jogo3 = Jogo('Mortal Kombat', 'Luta', 'PS2')
-lista = [jogo1, jogo2, jogo3]
-
-
-class Usuario():
-    def __init__(self, nome, nickname, senha):
-        self.nome = nome
-        self.nickname = nickname
-        self.senha = senha
+jogo_dao = JogoDao(db)
 
 usuario1 = Usuario("Diogo Braga", "dbn", "cdfd")
 usuario2 = Usuario("Paula Braga", "pb", "lion")
@@ -30,12 +26,10 @@ usuarios = {
             usuario1.nickname: usuario1,
             }
 
-app = Flask(__name__)
-app.secret_key = 'alura'
-
 
 @app.route('/')
 def index():
+    lista = jogo_dao.listar()
     return render_template('lista.html', titulo='Jogos', jogos=lista)
 
 
@@ -52,7 +46,7 @@ def criar():
     categoria = request.form['categoria']
     console = request.form['console']
     jogo = Jogo(nome, categoria, console)
-    lista.append(jogo)
+    jogo_dao.salvar(jogo)
     return redirect(url_for('index'))
 
 
